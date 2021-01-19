@@ -6,11 +6,7 @@ const AUTH_API = 'http://localhost:61955/Api/Authenticate/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
-    //'Access-Control-Allow-Origin':'*',
-  //'Access-Control-Allow-Headers':'Content-Type',
-  //'Access-Control-Allow-Methods':'GET,POST,PUT,DELETE,OPTIONS',
-  'Content-Type':'application/json'
-  
+    'Content-Type':'application/json'  
    })
 };
 
