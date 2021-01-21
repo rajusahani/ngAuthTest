@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
+//import { AppRoutingModule } from './app-routing.module';
+import { AppRoutes } from './app.routes';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -13,9 +14,12 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AuthGuardService } from './auth/auth-guard.service';
+import { AuthService } from './auth/auth.service';
+//import { RoleGuardService } from './auth/role-guard.service';
 import { HeaderComponent } from './header/header.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
- 
+import { JwtModule,JwtHelperService,JWT_OPTIONS  } from '@auth0/angular-jwt';
  
 @NgModule({
   declarations: [
@@ -27,18 +31,21 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
     BoardAdminComponent,
     BoardModeratorComponent,
     BoardUserComponent,
-    HeaderComponent
+    HeaderComponent 
     
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    //AppRoutingModule,
+    AppRoutes,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule ,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot() 
+    
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,AuthService, AuthGuardService,JwtHelperService],
   bootstrap: [AppComponent]
 })
+ 
 export class AppModule { }

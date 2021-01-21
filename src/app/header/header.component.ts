@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
       this.roles = user.roles;
       this.userrole=this.roles.length==1?this.roles[0]:this.roles[1];
 
-      this.showAdminBoard =this.userrole=="Admin"?true:false;//.includes('ROLE_ADMIN');
+      this.showAdminBoard =this.userrole=="admin"?true:false;//.includes('ROLE_ADMIN');
       this.showModeratorBoard =true; //this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
       this.token=user.accessToken;      
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
 
     return this.http.get("http://localhost:61955/Api/Authenticate/getuser").subscribe(resp => {
        var data=resp;
-       console.log(data);
+       //console.log(data);
       });
    
   }
