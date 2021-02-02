@@ -29,15 +29,9 @@ export class ApiSpinnerInterceptor implements HttpInterceptor{
         return next.handle(req)
             .pipe ( tap (
                     event => console.log(event),
-<<<<<<< HEAD
-                    error => console.log( error )
-                ), finalize(() => {
-                    finished = false;
-=======
                     //error => console.log( error )
                 ), finalize(() => {
                     finished = true;
->>>>>>> ec4642fb2ce4cee70f807891c7b0e7916dce7846
                     this.count--;                  
                     if ( this.count == 0 ) this.spinner.hide ();
                 })
