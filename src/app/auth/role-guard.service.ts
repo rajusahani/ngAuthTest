@@ -9,12 +9,13 @@ export class RoleGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // this will be passed from the route config
     // on the data property
-    const expectedRole = route.data.expectedRole;
-    const token =this.token.getToken();     //localStorage.getItem('token');
-    console.log(token);
+    const allowedRoles = route.data.allowedRoles;
+    const token =this.token.getToken();      
     // decode the token to get its payload
     const tokenPayload = decode(token);
-    if (!this.auth.isAuthenticated())// || tokenPayload.role !== expectedRole )
+    
+   // console.log(tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+    if (!this.auth.isAuthenticated() ||tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] !== allowedRoles )
      {
       this.router.navigate(['login']);
       return false;

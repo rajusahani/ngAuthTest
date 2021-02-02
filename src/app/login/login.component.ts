@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+ 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
     }
   }
   onSubmit(): void {
+  
     this.authService.login(this.form).subscribe(
       data => {
         console.log('success');        
@@ -31,8 +33,10 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;        
         this.reloadPage();
+         
       },
       err => {
+       
         console.log(err);
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;

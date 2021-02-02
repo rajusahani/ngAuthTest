@@ -9,7 +9,11 @@ import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
 import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  //{ path: '', redirectTo: "/login", pathMatch: 'full' },  
+  { 
+    path: 'home', component: HomeComponent,
+    canActivate: [AuthGuard] 
+ },
   { path: 'login', component: LoginComponent },
   { 
     path: 'profile',
@@ -19,16 +23,16 @@ export const routes: Routes = [
   { 
     path: 'admin',
     component: BoardAdminComponent,
-    canActivate: [AuthGuard] 
-   // data: {expectedRole: 'admin'} 
+    canActivate: [RoleGuard] ,
+    data: {allowedRoles: 'admin'} 
   },
   { 
     path: 'user',
     component: BoardAdminComponent,
-    canActivate: [AuthGuard] ,
-    data: {expectedRole: 'user'} 
+    canActivate: [RoleGuard] ,
+    data: {allowedRoles: 'user'} 
   },  
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
